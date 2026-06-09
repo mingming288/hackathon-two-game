@@ -7,3 +7,10 @@ serve.out.log
 serve.err.log
 vite.out.log
 vite.err.log
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
