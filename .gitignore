@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.specstory/
+.cursorindexingignore
+*.log
+serve.out.log
+serve.err.log
+vite.out.log
+vite.err.log

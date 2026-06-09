@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>俯视角动作小游戏</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <canvas id="gameCanvas" aria-label="3D top-down action game"></canvas>
+
+    <main id="hud" class="hud">
+      <section class="topbar">
+        <div class="mission-strip">
+          <div id="sceneName" class="scene-name">凌晨三点</div>
+          <div id="missionText" class="mission-text">任务加载中</div>
+        </div>
+        <div class="status-strip">
+          <div class="status-chip">
+            <span class="status-label">时间</span>
+            <strong id="timerText">90</strong>
+          </div>
+          <div class="status-chip danger">
+            <span class="status-label">出拳</span>
+            <strong id="attemptText">3</strong>
+          </div>
+          <button id="pauseButton" class="pause-button" type="button" aria-label="暂停">⏸</button>
+        </div>
+      </section>
+
+      <section id="inGameTargetCard" class="in-game-target-card">
+        <div class="in-game-target-title">目标</div>
+        <canvas
+          id="inGameTargetCanvas"
+          class="in-game-target-canvas"
+          width="96"
+          height="110"
+        ></canvas>
+      </section>
+
+      <div id="clueBar" class="clue-bar">🔍 目标特征加载中</div>
+
+      <section class="controls">
+        <div id="joystick" class="joystick" aria-label="虚拟摇杆">
+          <div id="joystickKnob" class="joystick-knob"></div>
+        </div>
+        <button id="attackButton" class="attack-button" type="button" aria-label="干爆">
+          <span>拳</span>
+          <div id="cooldownOverlay" class="cooldown-overlay"></div>
+        </button>
+      </section>
+    </main>
+
+    <!-- 暂停弹窗 -->
+    <section id="pauseModal" class="modal">
+      <div class="modal-panel">
+        <div class="modal-title">⏸ 暂停</div>
+        <p class="modal-copy" style="font-size:15px;color:var(--muted)">游戏已暂停</p>
+        <div class="task-actions">
+          <button id="resumeButton" class="primary-button" type="button">继续游戏</button>
+          <button id="backFromPauseButton" class="secondary-button" type="button">返回选关</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关卡选择界面 -->
+    <section id="levelSelectModal" class="modal visible">
+      <div class="level-select-panel">
+        <div class="game-logo">🔥 别让我逮到你 🔥</div>
+        <div id="levelCards" class="level-cards"></div>
+      </div>
+    </section>
+
+    <!-- 任务简报弹窗 -->
+    <section id="taskModal" class="modal">
+      <div class="modal-panel task-panel">
+        <div id="taskEmoji" class="task-emoji">🌙</div>
+        <div id="taskTitle" class="modal-title">任务</div>
+        <div class="target-preview-wrap">
+          <canvas id="targetPreviewCanvas" class="target-preview-canvas" width="200" height="220"></canvas>
+          <div id="targetLabel" class="target-label">目标</div>
+        </div>
+        <p id="taskCopy" class="modal-copy task-mission">任务加载中</p>
+        <div id="taskClue" class="task-clue">🔍 线索加载中</div>
+        <div class="task-info-row">
+          <div class="task-info-chip">⏱ <span id="taskTime">90</span> 秒</div>
+          <div class="task-info-chip">🥊 <span id="taskAttempts">3</span> 次机会</div>
+        </div>
+        <div class="task-controls-guide">
+          <div class="guide-item"><span class="guide-icon">🕹</span> 摇杆/WASD 移动</div>
+          <div class="guide-item"><span class="guide-icon">👊</span> 拳按钮/空格 攻击</div>
+        </div>
+        <div class="task-actions">
+          <button id="backFromTaskButton" class="secondary-button" type="button">返回选关</button>
+          <button id="startButton" class="primary-button" type="button">开始行动</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 结算弹窗 -->
+    <section id="resultModal" class="modal">
+      <div class="modal-panel result-panel">
+        <div id="resultRating" class="result-rating">S</div>
+        <div id="resultTitle" class="modal-title">结算</div>
+        <p id="resultCopy" class="modal-copy">结果加载中</p>
+        <div class="result-stats">
+          <div class="stat-row"><span>⏱ 用时</span><strong id="statTime">--</strong></div>
+          <div class="stat-row"><span>🥊 剩余出拳</span><strong id="statAttempts">--</strong></div>
+        </div>
+        <div class="result-actions">
+          <button id="retryButton" class="primary-button" type="button">再来一局</button>
+          <button id="backToSelectButton" class="secondary-button" type="button">返回选关</button>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="/src/game.js"></script>
+  </body>
+</html>
